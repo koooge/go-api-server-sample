@@ -4,7 +4,7 @@ build:
 	$(GO_BUILD_ENV) go build -v -o api-server ./...
 
 run:
-	go run src/server.go
+	go run server.go
 
 clean:
 	@rm -v api-server
