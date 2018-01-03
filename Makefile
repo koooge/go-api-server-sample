@@ -1,5 +1,7 @@
+GO_BUILD_ENV := CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+
 build:
-	go build -v -o api-server ./...
+	$(GO_BUILD_ENV) go build -v -o api-server ./...
 
 run:
 	go run src/server.go
