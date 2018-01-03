@@ -2,14 +2,22 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"net/http"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World")
+func foo(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Foo")
+}
+
+func bar(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Bar")
 }
 
 func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	l, _ := net.Listen("tcp", ":8080")
+	mux := http.NewServeMux()
+	mux.HandleFunc("/foo", foo)
+	mux.HandleFunc("/bar", bar)
+	fmt.Println(http.Serve(l, mux))
 }
