@@ -1,2 +1,10 @@
 # go-api-server-sample
-go practice
+API server sample in go
+
+## Usage
+run
+```
+$ make run
+```
+
+listen http://localhost:8080/
