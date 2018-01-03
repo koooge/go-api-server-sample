@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"os"
 )
 
 func foo(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +20,11 @@ func bar(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	l, _ := net.Listen("tcp", ":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":8080"
+	}
+	l, _ := net.Listen("tcp", port)
 	mux := http.NewServeMux()
 	mux.HandleFunc("/foo/", foo)
 	mux.HandleFunc("/bar/", bar)
